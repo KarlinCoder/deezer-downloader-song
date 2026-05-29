@@ -52,7 +52,7 @@ export async function downloadTrack({
 
   emitProgress(onProgress, trackId, fullTitle, 0.0, "resolving");
 
-  const { url, actualQuality } = await client.getTrackDownloadUrl(
+  const [url, actualQuality] = await client.getTrackDownloadUrl(
     track,
     quality,
     true,
