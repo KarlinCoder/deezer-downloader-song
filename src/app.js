@@ -14,6 +14,10 @@ if (!ARL) {
   process.exit(1);
 }
 
+app.get("/", (req, res) => {
+  res.json({ status: "ok", service: "deezer-downloader-api" });
+});
+
 let clientPromise;
 
 app.get("/download/:id", async (req, res) => {
