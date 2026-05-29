@@ -50,9 +50,10 @@ app.get("/download/:id", async (req, res) => {
     stream.pipe(res);
 
     stream.on("close", () => {
-      unlink(result.filePath).catch(() => {});
+      unlink(result.filePath).catch((err) => console.error("Cleanup error:", err));
     });
   } catch (error) {
+    console.error(`[/download/${req.params.id}] Error:`, error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -77,6 +78,7 @@ app.get("/info/:id", async (req, res) => {
       duration: trackData.DURATION || 0,
     });
   } catch (error) {
+    console.error(`[/info/${req.params.id}] Error:`, error);
     res.status(500).json({ error: error.message });
   }
 });
