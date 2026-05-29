@@ -600,7 +600,11 @@ function createHttpClient({ headers, jar }) {
       if (setCookie) {
         const cookies = setCookie.split(",");
         for (const cookie of cookies) {
-          await jar.setCookie(cookie.trim(), url);
+          try {
+            await jar.setCookie(cookie.trim(), url);
+          } catch {
+            // Ignorar cookies no parseables
+          }
         }
       }
 
@@ -634,7 +638,11 @@ function createHttpClient({ headers, jar }) {
       if (setCookie) {
         const cookies = setCookie.split(",");
         for (const cookie of cookies) {
-          await jar.setCookie(cookie.trim(), url);
+          try {
+            await jar.setCookie(cookie.trim(), url);
+          } catch {
+            // Ignorar cookies no parseables
+          }
         }
       }
 
